@@ -14,7 +14,15 @@ interface FormValues {
   email: string;
 }
 
+interface ICategory {
+  id: number;
+  title: string;
+  text_color: string;
+  background_color: string;
+}
+
 export default function Main() {
+  const [categories, setCategories] = useState([]);
   const [formValues, setFormValues] = useState<FormValues>({
     author: "",
     title: "",
@@ -65,11 +73,23 @@ export default function Main() {
     setSubmitting(false);
   };
 
+  async function getData() {
+    let response = await fetch(
+      "https://george.pythonanywhere.com/api/categories"
+    );
+    let data = await response.json();
+    return data;
+  }
+
   useEffect(() => {
     const storedValues = localStorage.getItem("formValues");
     if (storedValues) {
       setFormValues(JSON.parse(storedValues));
     }
+
+    getData()
+      .then((data) => setCategories(data))
+      .catch((error) => console.error(error));
   }, []);
 
   return (
@@ -186,12 +206,24 @@ export default function Main() {
                 <div className="flex flex-col gap-2">
                   <Label htmlForValue="category" labelText="კატეგორია*" />
                   <Field
-                    as="input"
-                    type="text"
+                    as="select"
                     name="category"
-                    placeholder="აირჩიეთ კატეგორია"
                     className="border border-gray-300 rounded-lg p-3"
-                  />
+                  >
+                    <option value="">აირჩიეთ კატეგორია</option>{" "}
+                    {categories.map((category: ICategory) => (
+                      <option
+                        key={category.id}
+                        value={category.title}
+                        style={{
+                          backgroundColor: category.background_color,
+                          color: category.text_color,
+                        }}
+                      >
+                        {category.title}
+                      </option>
+                    ))}
+                  </Field>
                   <ErrorMessage
                     name="category"
                     component="div"
