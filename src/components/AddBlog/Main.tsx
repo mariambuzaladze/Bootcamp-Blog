@@ -3,6 +3,7 @@ import Folder from "/images/folder-add.png";
 import Label from "./Label";
 import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 interface FormValues {
@@ -94,11 +95,13 @@ export default function Main() {
 
   return (
     <main className="bg-gray-100 min-h-screen flex relative justify-center py-[40px] px-[76px]">
-      <img
-        src={Arrow}
-        alt="arrow"
-        className="absolute left-[76px] rounded-full sm:block hidden cursor-pointer"
-      />
+      <Link to="/">
+        <img
+          src={Arrow}
+          alt="arrow"
+          className="absolute left-[76px] rounded-full sm:block hidden cursor-pointer"
+        />
+      </Link>
 
       <Formik
         initialValues={initialValues}

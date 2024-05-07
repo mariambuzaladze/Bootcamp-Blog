@@ -1,11 +1,18 @@
 import "./App.css";
-import Blog from "./components/Blog/Blog";
+import HomePage from "./pages/HomePage";
+import BlogPage from "./pages/BlogPage";
+import AddBlogPage from "./pages/AddBlogPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Blog />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog/:id" element={<BlogPage />} />
+        <Route path="/addBlog" element={<AddBlogPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

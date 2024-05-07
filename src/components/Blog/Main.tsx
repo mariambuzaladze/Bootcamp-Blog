@@ -1,5 +1,5 @@
 import Arrow from "/images/Arrow.png";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface ICategory {
   id: number;
@@ -19,28 +19,16 @@ interface IBlog {
   categories: ICategory[];
 }
 
-export default function Main() {
-  const [blog, setBlog] = useState<IBlog>();
-
-  async function getData() {
-    let response = await fetch("https://george.pythonanywhere.com/api/blogs");
-    let data = await response.json();
-    return data[0];
-  }
-
-  useEffect(() => {
-    getData()
-      .then((data) => setBlog(data))
-      .catch((error) => console.error(error));
-  }, []);
-
+export default function Main({ blog }: { blog: IBlog }) {
   return (
     <main className="bg-gray-100 min-h-screen flex relative justify-center pt-[40px] pb-[5px] px-[76px]">
-      <img
-        src={Arrow}
-        alt="arrow"
-        className="absolute left-[76px] rounded-full sm:block hidden cursor-pointer"
-      />
+      <Link to="/">
+        <img
+          src={Arrow}
+          alt="arrow"
+          className="absolute left-[76px] rounded-full sm:block hidden cursor-pointer"
+        />
+      </Link>
 
       <div key={blog?.id} className="flex flex-col gap-4">
         <img

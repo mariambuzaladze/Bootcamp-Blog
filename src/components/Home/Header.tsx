@@ -1,4 +1,5 @@
 import Logo from "/images/LOGO-02 3.png";
+import { Link } from "react-router-dom";
 
 export default function Header({
   onClick,
@@ -12,9 +13,11 @@ export default function Header({
       <img src={Logo} alt="redberry logo" />
 
       {loggedIn ? (
-        <button className="rounded-lg bg-indigo-600 text-white text-base font-medium leading-snug px-[20px] py-[10px]">
-          დაამატე ბლოგი
-        </button>
+        <Link to={"/addBlog"}>
+          <button className="rounded-lg bg-indigo-600 text-white text-base font-medium leading-snug px-[20px] py-[10px]">
+            დაამატე ბლოგი
+          </button>
+        </Link>
       ) : (
         <button
           onClick={onClick}

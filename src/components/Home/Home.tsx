@@ -11,8 +11,6 @@ export default function Home() {
     setShowLogin(!showLogin);
   };
 
-  console.log(loggedIn);
-
   return (
     <div>
       <div className={`relative ${showLogin ? "opacity-50" : ""}`}>

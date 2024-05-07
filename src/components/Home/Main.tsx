@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import BlogIllustration from "/images/Blog-1024x355 1.png";
 
 interface ICategory {
@@ -121,9 +122,12 @@ export default function Main() {
               ))}
             </div>
 
-            <a className="text-sm font-bold leading-6 text-indigo-600">
+            <Link
+              to={`/blog/${blog.id}`}
+              className="text-sm font-bold leading-6 text-indigo-600"
+            >
               სრულად ნახვა
-            </a>
+            </Link>
           </div>
         ))}
       </div>
