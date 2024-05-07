@@ -95,7 +95,7 @@ export default function Main() {
                 {blog.author}
               </p>
               <p className="text-xs leading-4 text-gray-600">
-                {blog.publish_date}
+                {blog?.publish_date.split("T")[0]}
               </p>
             </div>
 
