@@ -73,7 +73,7 @@ export default function Main() {
     setSubmitting(false);
   };
 
-  async function getData() {
+  async function getCategories() {
     let response = await fetch(
       "https://george.pythonanywhere.com/api/categories"
     );
@@ -87,7 +87,7 @@ export default function Main() {
       setFormValues(JSON.parse(storedValues));
     }
 
-    getData()
+    getCategories()
       .then((data) => setCategories(data))
       .catch((error) => console.error(error));
   }, []);
