@@ -29,7 +29,7 @@ export default function BlogPage() {
     let response = await fetch("https://george.pythonanywhere.com/api/blogs");
     let data = await response.json();
     setBlog(data);
-    return data[parseInt(id)];
+    return data[parseInt(id) - 32];
   }
 
   useEffect(() => {
