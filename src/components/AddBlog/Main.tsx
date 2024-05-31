@@ -36,6 +36,8 @@ export default function Main() {
     blogImage: "",
   });
 
+  console.log(formValues);
+
   const validationSchema = Yup.object().shape({
     author: Yup.string()
       .matches(/^[\u10A0-\u10FF\s]+$/, "მხოლოდ ქართული სიმბოლოები")
