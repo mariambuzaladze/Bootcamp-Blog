@@ -13,6 +13,7 @@ interface FormValues {
   date: string;
   category: string;
   email: string;
+  blogImage: string;
 }
 
 interface ICategory {
@@ -23,6 +24,7 @@ interface ICategory {
 }
 
 export default function Main() {
+  const [imageData, setImageData] = useState<string>("");
   const [categories, setCategories] = useState([]);
   const [formValues, setFormValues] = useState<FormValues>({
     author: "",
@@ -31,6 +33,7 @@ export default function Main() {
     date: "",
     category: "",
     email: "",
+    blogImage: "",
   });
 
   const validationSchema = Yup.object().shape({
@@ -62,12 +65,45 @@ export default function Main() {
     date: "",
     category: "",
     email: "",
+    blogImage: "",
   };
 
-  const handleSubmit = (
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageData(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (
     values: FormValues,
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
+    console.log(values);
+    fetch("https://george.pythonanywhere.com/api/blogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
     localStorage.setItem("formValues", JSON.stringify(values));
 
     setFormValues(values);
@@ -123,7 +159,8 @@ export default function Main() {
                 type="file"
                 accept="image/*"
                 name="blogImage"
-                hidden
+                onChange={handleImageUpload}
+                value={imageData}
               />
               <div
                 id="image-view"

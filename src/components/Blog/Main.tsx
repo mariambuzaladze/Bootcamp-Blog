@@ -30,7 +30,7 @@ export default function Main({ blog }: { blog: IBlog }) {
         />
       </Link>
 
-      <div key={blog?.id} className="flex flex-col gap-4">
+      <div key={blog?.id} className="flex flex-col gap-4 max-w-xl">
         <img
           src={blog?.image}
           alt="blog image"
@@ -49,7 +49,7 @@ export default function Main({ blog }: { blog: IBlog }) {
           </div>
         </div>
 
-        <p className="text-3xl leading-5 font-bold text-gray-700">
+        <p className="text-3xl leading-8 font-bold text-gray-700">
           {blog?.title}
         </p>
 
