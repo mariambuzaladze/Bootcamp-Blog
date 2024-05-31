@@ -22,6 +22,7 @@ export default function Login({ setShowLogin, setLoggedIn }: LoginProps) {
     actions.setSubmitting(true);
     setLoggedIn(true);
     setShowLogin(false);
+    console.log(values);
   };
 
   return (
